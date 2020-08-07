@@ -1,7 +1,7 @@
 #include <Arduino.h>
-#include <FastLED.h>      // link to git
-#include <IRLremote.h>    // link to git
-#include <GyverEncoder.h> // link to git
+#include <FastLED.h>      // https://github.com/FastLED/FastLED
+#include <IRLremote.h>    // https://github.com/NicoHood/IRLremote
+#include <GyverEncoder.h> // https://github.com/AlexGyver/GyverLibs/tree/master/GyverEncoder
 #include "options.h"
 
 CRGB    leds[LEDS_COUNT];
