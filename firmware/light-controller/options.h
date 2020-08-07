@@ -1,7 +1,7 @@
 #pragma once
 
 /***************************************
-	GLOBAL OPTIONS
+  GLOBAL OPTIONS
 ***************************************/
 // Serial port
 #define SERIAL_BAUD_RATE 115200
@@ -10,8 +10,8 @@
 #define PIN_LED 12
 #define LEDS_COUNT 60
 
-#define MIN_BRIGHTNESS 2   						// 0..250
-#define MAX_BRIGHTNESS 255 						// 1..255
+#define MIN_BRIGHTNESS 2              // 0..250
+#define MAX_BRIGHTNESS 255            // 1..255
 
 // Encoder
 #define PIN_CLK 5
@@ -22,14 +22,14 @@
 #define PIN_IR 2
 
 /***************************************
-	SFX OPTIONS
+  SFX OPTIONS
 ***************************************/
-#define	SFX_EFFECTS_COUNT 3       		// effects count
+#define SFX_EFFECTS_COUNT 3           // effects count
 
-#define MAX_FPS 60               			// FPS Limit
-#define FPS 30                    		// 1..MAX_FPS
+#define MAX_FPS 60                    // FPS Limit
+#define FPS 30                        // 1..MAX_FPS
 
 /***************************************
-	SFX-EFFECTS OPTION
+  SFX-EFFECTS OPTION
 ***************************************/
 #define SFX_EFFECT_200_LED (LEDS_COUNT / 2)
