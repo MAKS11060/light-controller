@@ -2,7 +2,9 @@
 #include <FastLED.h>      // https://github.com/FastLED/FastLED
 #include <IRLremote.h>    // https://github.com/NicoHood/IRLremote
 #include <GyverEncoder.h> // https://github.com/AlexGyver/GyverLibs/tree/master/GyverEncoder
+
 #include "options.h"
+
 
 CRGB    leds[LEDS_COUNT];
 Encoder enc1(PIN_CLK, PIN_DT, PIN_SW);
@@ -60,7 +62,6 @@ namespace sfx {
     }
   }
 }
-
 #include "sfx.h"
 
 
@@ -160,8 +161,7 @@ void setup() {
 
   // Serial port
   Serial.begin(SERIAL_BAUD_RATE);
-  Serial.println("Serial enabled");
-  Serial.write(0x3);
+  // Serial.print("Serial enabled ");Serial.write(0x3);Serial.write(0xa);
 
   // Leds
   FastLED.addLeds<WS2811, PIN_LED, GRB>(leds, LEDS_COUNT)
@@ -231,16 +231,6 @@ void handler_Encoder() {
   // if (enc1.isHolded()) {}
 }
 
-// TTL UART
-void handler_Serial() {
-  int16_t data;
-
-  while(Serial.available() > 0) {
-    data = Serial.read();
-
-    Serial.write(data);
-  }
-}
 
 // IRLremote
 void handler_IRL_keys(uint8_t &command, uint8_t &holded) {
@@ -458,11 +448,12 @@ void handler_IRL() { // IR-remote 44 key
 }
 
 
+#include "serialParser.h"
 
 void loop() {
-  handler_Encoder();
-  handler_Serial();
   handler_IRL();
+  handler_Encoder();
+  serialParser::parse();
 
   if (!IRLremote.receiving()) {
     sfx::render();

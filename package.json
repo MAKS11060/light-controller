@@ -1,0 +1,15 @@
+{
+  "name": "light-controller",
+  "version": "0.0.1",
+  "main": "index.js",
+  "author": "maks11060",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node src/index.js",
+    "nodemon": "nodemon src/index.js"
+  },
+  "dependencies": {
+    "serialport": "^9.0.0"
+  }
+}
