@@ -1,7 +1,7 @@
 {
   "name": "light-controller",
   "version": "0.0.1",
-  "main": "index.js",
+  "exports": "index.js",
   "author": "maks11060",
   "license": "MIT",
   "type": "module",
