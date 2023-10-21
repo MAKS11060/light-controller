@@ -2,8 +2,8 @@
 #include <FastLED.h>
 #include <IRLremote.h>
 
-#include "utils.h"
 #include "config.h"
+#include "utils.h"
 
 #define LED_FX_COUNT 2
 // Flags
