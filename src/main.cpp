@@ -106,7 +106,7 @@ class Led {
     mode = static_cast<uint8_t>(val);
   }
 
-  void setBrigthness(uint8_t val) {
+  void setBrightness(uint8_t val) {
     if (mode == MODE::Off) return;  // prevent change
 
     uint8_t *brightness = &fx_static.brightness;
@@ -175,13 +175,22 @@ class Led {
 CNec ir;  // Define IR handler
 Led led;
 
-uint8_t ldrRead() { return (uint8_t)map(analogRead(LDR_PIN), 0, 1023, 0, 255); }
+// 255 == Dark, 0 = Light
+uint8_t ldrRead() {
+  return (uint8_t)map(1023 - analogRead(LDR_PIN), 0, 1023, 0, 255);
+}
 
-void ldrHanlder() {
+void ldrHandler() {
   static uint32_t timer = 0;
+  static uint8_t currentLight = 0;
+
   if (bitRead(led.flags, LED_FLAG_AUTO) && millis() - timer >= 1000) {
     timer = millis();
-    led.setBrigthness(constrain(255 - ldrRead(), 0, 200));  // min max
+    uint8_t light = constrain(ldrRead(), 0, 200);  // min max
+    if (abs(light - currentLight) >= 5) {  // if the difference is more than 5
+      currentLight = light;
+    }
+    led.setBrightness(currentLight);
   }
 }
 
@@ -324,7 +333,7 @@ void irHandler(uint8_t c) {
 #endif
 }
 
-void irHanlderTick() {
+void irHandlerTick() {
   if (ir.available()) {
     auto c = ir.read();
     static uint8_t last_command = 0;
@@ -378,7 +387,7 @@ void setup() {
 }
 
 void loop() {
-  irHanlderTick();
-  ldrHanlder();
+  irHandlerTick();
+  ldrHandler();
   if (!ir.receiving()) led.tick();
 }
